@@ -1,0 +1,314 @@
+{% extends 'storage/base.html' %}
+{% block content    %}
+{% load static %}
+    <div class="nk-content-body">
+        <div class="nk-block-head nk-block-head-sm">
+            <div class="nk-block-between">
+                <div class="nk-block-head-content">
+                    <h3 class="nk-block-title page-title">Mahsulotlar</h3>
+                </div><!-- .nk-block-head-content -->
+                <div class="nk-block-head-content">
+                    <div class="toggle-wrap nk-block-tools-toggle">
+                        <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
+                        <div class="toggle-expand-content" data-content="pageMenu">
+                            <ul class="nk-block-tools g-3">
+                                <li>
+                                    <div class="form-control-wrap">
+                                        <div class="form-icon form-icon-right">
+                                            <em class="icon ni ni-search"></em>
+                                        </div>
+                                        <input type="text" class="form-control" id="default-04" placeholder="Izlash...">
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="drodown">
+                                        <a href="#" class="dropdown-toggle dropdown-indicator btn btn-outline-light btn-white" data-bs-toggle="dropdown">Status</a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <ul class="link-list-opt no-bdr">
+                                                <li><a href="#"><span>Yangi mahsulotlar</span></a></li>
+                                                    <li><a href="#"><span>Tanlanganlar</span></a></li>
+                                                <li><a href="#"><span>Tugagan mahsulotlar</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="nk-block-tools-opt">
+                                    <a href="#" data-target="addProduct" class="toggle btn btn-icon btn-primary d-md-none"><em class="icon ni ni-plus"></em></a>
+                                    <a href="#" data-target="addProduct" class="toggle btn btn-primary d-none d-md-inline-flex"><em class="icon ni ni-plus"></em><span>Mahsulot qo'shish</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- .nk-block-head-content -->
+            </div><!-- .nk-block-between -->
+        </div><!-- .nk-block-head -->
+        {% if alert %}
+            <div class="alert alert-success alert-icon"><em class="icon ni ni-check-circle"></em> <strong>Mahsulot muvaffaqqiyatli o'chirildi!</strong></div>
+        {% endif %}
+        <div class="nk-block">
+            <div class="nk-tb-list is-separate mb-3">
+                <div class="nk-tb-item nk-tb-head">
+                    <div class="nk-tb-col nk-tb-col-check">
+                        <div class="custom-control custom-control-sm custom-checkbox notext">
+                            <input type="checkbox" class="custom-control-input" id="pid">
+                            <label class="custom-control-label" for="pid"></label>
+                        </div>
+                    </div>
+                    <div class="nk-tb-col tb-col-sm"><span>Mahsulot nomi</span></div>
+                    <div class="nk-tb-col"><span>Mahsulot kodi</span></div>
+                    <div class="nk-tb-col"><span>Narxi</span></div>
+                    <div class="nk-tb-col"><span>Miqdori</span></div>
+                    <div class="nk-tb-col tb-col-md"><span>Kategoriya</span></div>
+                    <div class="nk-tb-col tb-col-md"><em class="tb-asterisk icon ni ni-star-round"></em></div>
+                    <div class="nk-tb-col nk-tb-col-tools">
+                        <ul class="nk-tb-actions gx-1 my-n1">
+                            <li class="me-n1">
+                                <div class="dropdown">
+                                    <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <ul class="link-list-opt no-bdr">
+                                            <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Selected</span></a></li>
+                                            <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Selected</span></a></li>
+                                            <li><a href="#"><em class="icon ni ni-bar-c"></em><span>Update Stock</span></a></li>
+                                            <li><a href="#"><em class="icon ni ni-invest"></em><span>Update Price</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div><!-- .nk-tb-item -->
+
+                {% for product in products %}
+                    <div class="nk-tb-item">
+                    <div class="nk-tb-col nk-tb-col-check">
+                        <div class="custom-control custom-control-sm custom-checkbox notext">
+                            <input type="checkbox" class="custom-control-input" id="pid1">
+                            <label class="custom-control-label" for="pid1"></label>
+                        </div>
+                    </div>
+                    <div class="nk-tb-col tb-col-sm">
+                        <span class="tb-product">
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" alt="" class="thumb">
+                            {% endif %}
+                            <span class="title">{{product.name}}</span>
+                        </span>
+                    </div>
+                    <div class="nk-tb-col">
+                        <span class="tb-sub">UY3749</span>
+                    </div>
+                    <div class="nk-tb-col">
+                        <span class="tb-lead">$ {{ product.price }}</span>
+                    </div>
+                    <div class="nk-tb-col">
+                        <span class="tb-sub">49</span>
+                    </div>
+                    <div class="nk-tb-col tb-col-md">
+                        <span class="tb-sub">{{product.category}}</span>
+                    </div>
+                    <div class="nk-tb-col tb-col-md">
+                        <div class="asterisk tb-asterisk">
+                            <a href="#"><em class="asterisk-off icon ni ni-star"></em><em class="asterisk-on icon ni ni-star-fill"></em></a>
+                        </div>
+                    </div>
+                    <div class="nk-tb-col nk-tb-col-tools">
+                        <ul class="nk-tb-actions gx-1 my-n1">
+                            <li class="me-n1">
+                                <div class="dropdown">
+                                    <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <ul class="link-list-opt no-bdr">
+                                            <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Product</span></a></li>
+                                            <li><a href="#"><em class="icon ni ni-eye"></em><span>View Product</span></a></li>
+                                            <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Product Orders</span></a></li>
+                                            <li><a href="{% url 'storage:delete-product' product.id %}"><em class="icon ni ni-trash"></em><span>O'chirish</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div><!-- .nk-tb-item -->
+                {% endfor %}
+                <div class="nk-tb-item">
+                    <div class="nk-tb-col nk-tb-col-check">
+                        <div class="custom-control custom-control-sm custom-checkbox notext">
+                            <input type="checkbox" class="custom-control-input" id="pid3">
+                            <label class="custom-control-label" for="pid3"></label>
+                        </div>
+                    </div>
+                    <div class="nk-tb-col tb-col-sm">
+                        <span class="tb-product">
+                            <img src="{% static 'images/product/c' %}.png" alt="" class="thumb">
+                            <span class="title">Black Mi Band Smartwatch</span>
+                        </span>
+                    </div>
+                    <div class="nk-tb-col">
+                        <span class="tb-sub">UY3751</span>
+                    </div>
+                    <div class="nk-tb-col">
+                        <span class="tb-lead">$ 299.49</span>
+                    </div>
+                    <div class="nk-tb-col">
+                        <span class="tb-sub">68</span>
+                    </div>
+                    <div class="nk-tb-col tb-col-md">
+                        <span class="tb-sub">Smartwatch, Tracker</span>
+                    </div>
+                    <div class="nk-tb-col tb-col-md">
+                        <div class="asterisk tb-asterisk">
+                            <a href="#" class="active"><em class="asterisk-off icon ni ni-star"></em><em class="asterisk-on icon ni ni-star-fill"></em></a>
+                        </div>
+                    </div>
+                    <div class="nk-tb-col nk-tb-col-tools">
+                        <ul class="nk-tb-actions gx-1 my-n1">
+                            <li class="me-n1">
+                                <div class="dropdown">
+                                    <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <ul class="link-list-opt no-bdr">
+                                            <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Product</span></a></li>
+                                            <li><a href="#"><em class="icon ni ni-eye"></em><span>View Product</span></a></li>
+                                            <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Product Orders</span></a></li>
+                                            <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Product</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div><!-- .nk-tb-item -->
+            </div><!-- .nk-tb-list -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="nk-block-between-md g-3">
+                        <div class="g">
+                            <ul class="pagination justify-content-center justify-content-md-start">
+                                <li class="page-item"><a class="page-link" href="#"><em class="icon ni ni-chevrons-left"></em></a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><span class="page-link"><em class="icon ni ni-more-h"></em></span></li>
+                                <li class="page-item"><a class="page-link" href="#">6</a></li>
+                                <li class="page-item"><a class="page-link" href="#">7</a></li>
+                                <li class="page-item"><a class="page-link" href="#"><em class="icon ni ni-chevrons-right"></em></a></li>
+                            </ul><!-- .pagination -->
+                        </div>
+                        <div class="g">
+                            <div class="pagination-goto d-flex justify-content-center justify-content-md-start gx-3">
+                                <div>Page</div>
+                                <div>
+                                    <select class="form-select js-select2 " data-search="on" data-dropdown="xs center">
+                                        <option value="page-1">1</option>
+                                        <option value="page-2">2</option>
+                                        <option value="page-4">4</option>
+                                        <option value="page-5">5</option>
+                                        <option value="page-6">6</option>
+                                        <option value="page-7">7</option>
+                                        <option value="page-8">8</option>
+                                        <option value="page-9">9</option>
+                                        <option value="page-10">10</option>
+                                        <option value="page-11">11</option>
+                                        <option value="page-12">12</option>
+                                        <option value="page-13">13</option>
+                                        <option value="page-14">14</option>
+                                        <option value="page-15">15</option>
+                                        <option value="page-16">16</option>
+                                        <option value="page-17">17</option>
+                                        <option value="page-18">18</option>
+                                        <option value="page-19">19</option>
+                                        <option value="page-20">20</option>
+                                    </select>
+                                </div>
+                                <div>OF 102</div>
+                            </div>
+                        </div><!-- .pagination-goto -->
+                    </div><!-- .nk-block-between -->
+                </div>
+            </div>
+        </div><!-- .nk-block -->
+        <div class="nk-add-product toggle-slide toggle-slide-right" data-content="addProduct" data-toggle-screen="any" data-toggle-overlay="true" data-toggle-body="true" data-simplebar>
+            <div class="nk-block-head">
+                <div class="nk-block-head-content">
+                    <h5 class="nk-block-title">Mahsulot qo'shish</h5>
+                    <div class="nk-block-des">
+                        <p>Yangi mahsulot ma'lumotlarini kiriting.</p>
+                    </div>
+                </div>
+            </div><!-- .nk-block-head -->
+            <form action="{% url 'storage:products' %}" method="post">
+                {% csrf_token %}
+                <div class="nk-block">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="product-title">Mahsulot nomi</label>
+                                <div class="form-control-wrap">
+                                    <input name="name" type="text" class="form-control" id="product-title">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-mb-6">
+                            <div class="form-group">
+                                <label class="form-label" for="regular-price">Narxi</label>
+                                <div class="form-control-wrap">
+                                    <input name="price" type="text" class="form-control" id="regular-price">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-mb-6">
+                            <div class="form-group">
+                                <label class="form-label" for="sale-price">Chegirmaviy narxi</label>
+                                <div class="form-control-wrap">
+                                    <input name="sale_price" type="text" class="form-control" id="sale-price">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-mb-6">
+                            <div class="form-group">
+                                <label class="form-label" for="stock">Miqdori</label>
+                                <div class="form-control-wrap">
+                                    <input name="stock" type="text" class="form-control" id="stock">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-mb-6">
+                            <div class="form-group">
+                                <label class="form-label" for="SKU">Mahsulot kodi</label>
+                                <div class="form-control-wrap">
+                                    <input name="sku" type="text" class="form-control" id="SKU">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="category">Kategoriyasi</label>
+                                <div class="form-control-wrap">
+                                    <input name="category" type="text" class="form-control" id="category">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="tags">Qo'shimcha ma'lumot</label>
+                                <div class="form-control-wrap">
+                                    <input name="info" type="text" class="form-control" id="tags">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="upload-zone small bg-lighter my-2">
+                                <div class="dz-message">
+                                    <span class="dz-message-text">Rasm joylash uchun bosing yoki ustiga olib kelib qo'ying</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Qo'shish</span></button>
+                        </div>
+                    </div>
+                </div><!-- .nk-block -->
+            </form>
+        </div>
+    </div>
+{% endblock content %}
